@@ -1,6 +1,7 @@
-import "./App.css";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import Body from "./components/Body"
 
-function App() {
-  return <div className="bg-amber-200 font-bold">bulding netflix</div>;
-}
-export default App;
+const root=createRoot(document.getElementById('root'))
+root.render(<Body/>)
