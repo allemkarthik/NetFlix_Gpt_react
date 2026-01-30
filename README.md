@@ -1,6 +1,6 @@
 # NetFlix_gpt 
 
-- create react app
+- create react vite
 - configured tailwind app
 - header
 - routing
@@ -8,6 +8,9 @@
 - sign up form
 - form validation
 - useRef hook
+- firebase setup
+- deploying app to production
+- authentication setup
 
 ...
 

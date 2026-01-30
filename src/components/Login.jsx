@@ -2,14 +2,61 @@ import Header from "./Header";
 import bgimage from "../assets/Bg-image.jpg";
 import { useRef, useState } from "react";
 import { checkvalidData } from "../utils/validate.js";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../utils/firebase.js";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
+  const [errorMessage, setErrorMeassage] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
   const handlebuttonClick = () => {
     //validate the form data
-    checkvalidData();
+    const message = checkvalidData(email.current.value, password.current.value);
+    setErrorMeassage(message);
+    if (message) return;
+
+    if (!isSignInForm) {
+      //signup logic
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value,
+      )
+        .then((userCredential) => {
+          // Signed up
+          const user = userCredential.user;
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMeassage(errorCode + "/" + errorMessage);
+          // ..
+        });
+    } else {
+      //sign in logic
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value,
+      )
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMeassage(errorCode + "/" + errorMessage);
+        });
+    }
   };
   const toggleSignIn = () => {
     setSignInForm(!isSignInForm);
@@ -46,6 +93,7 @@ const Login = () => {
           placeholder="password"
           className="p-4 my-4 bg-gray-700 w-full"
         />
+        <p className="text-red-600 font-bold text-lg">{errorMessage}</p>
         <button
           className="p-4 my-6 bg-red-600 w-full rounded-lg"
           onClick={handlebuttonClick}
