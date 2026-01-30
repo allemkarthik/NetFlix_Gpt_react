@@ -1,18 +1,27 @@
 import Header from "./Header";
 import bgimage from "../assets/Bg-image.jpg";
 import { useRef, useState } from "react";
-import { checkvalidData } from "../utils/validate.js";
+import { checkvalidData } from "../utils/validate.jsx";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
-import { auth } from "../utils/firebase.js";
+import { auth } from "../utils/firebase.jsx";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/store/userDataSlice.jsx";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
   const [errorMessage, setErrorMeassage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
+
   const handlebuttonClick = () => {
     //validate the form data
     const message = checkvalidData(email.current.value, password.current.value);
@@ -29,6 +38,30 @@ const Login = () => {
         .then((userCredential) => {
           // Signed up
           const user = userCredential.user;
+          updateProfile(user, {
+            displayName: name.current.value,
+            photoURL: "https://example.com/jane-q-user/profile.jpg",
+          })
+            .then(() => {
+              // Profile updated!
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                }),
+              );
+              navigate("/browse");
+              // ...
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMeassage(error.message);
+              // ...
+            });
+          navigate("/browse");
           // ...
         })
         .catch((error) => {
@@ -47,7 +80,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          navigate("/browse");
 
           // ...
         })
@@ -76,6 +109,7 @@ const Login = () => {
         </h1>
         {!isSignInForm && (
           <input
+            ref={name}
             type="text"
             placeholder="Full name"
             className="p-4 my-4 bg-gray-700 w-full"

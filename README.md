@@ -11,6 +11,7 @@
 - firebase setup
 - deploying app to production
 - authentication setup
+- created redux store
 
 ...
 
