@@ -12,8 +12,11 @@
 - deploying app to production
 - authentication setup
 - created redux store
-
-...
+- implemented signout 
+- update profile
+- fetch moives from TMDB movies
+- bug fix: sign up user like unauthourized logins 
+- unsubscribe to the onauthstatechanged callback
 
 # Features
 
