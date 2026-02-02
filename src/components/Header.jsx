@@ -5,6 +5,7 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removerUser } from "../utils/store/userDataSlice";
+import { userAvatar } from "../utils/constants";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -54,10 +55,11 @@ const Header = () => {
           <img
             className="w-12 h-12"
             alt="usericon"
-            src="https://occ-0-1479-1480.1.nflxso.net/dnm/api/v6/vN7bi_My87NPKvsBoib006Llxzg/AAAABTZ2zlLdBVC05fsd2YQAR43J6vB1NAUBOOrxt7oaFATxMhtdzlNZ846H3D8TZzooe2-FT853YVYs8p001KVFYopWi4D4NXM.png?r=229"
+            src={userAvatar}
           ></img>
           <button onClick={handleSignOut} className="text-white font-bold">
             (Sign Out)
+            {/* {user.photoURL} */}
             {user.displayName}
           </button>
         </div>

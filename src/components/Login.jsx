@@ -11,6 +11,7 @@ import { auth } from "../utils/firebase.jsx";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/store/userDataSlice.jsx";
+import { photoURL } from "../utils/constants.jsx";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
@@ -40,7 +41,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://example.com/jane-q-user/profile.jpg",
+            photoURL: photoURL,
           })
             .then(() => {
               // Profile updated!
