@@ -6,6 +6,7 @@ const appStore=configureStore(
         reducer:{
             user : userDataSliceReducer,
             movies:moviesReducer,
+            
         }
     }
 )

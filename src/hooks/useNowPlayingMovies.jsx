@@ -3,8 +3,8 @@ import { API_OPTIONS } from "../utils/constants";
 import { addplayingMovies } from "../utils/store/movieListSlice";
 import { useEffect } from "react";
 
-const useNowPlayingMovies=()=>{
-    const dispatch = useDispatch();
+const useNowPlayingMovies = () => {
+  const dispatch = useDispatch();
 
   const getNowPlayingMovies = async () => {
     const data = await fetch(
@@ -12,12 +12,12 @@ const useNowPlayingMovies=()=>{
       API_OPTIONS,
     );
     const json = await data.json();
-    // console.log(json);
-    dispatch(addplayingMovies(json.results))
+
+    dispatch(addplayingMovies(json.results));
   };
   useEffect(() => {
     getNowPlayingMovies();
   }, []);
-}
+};
 
 export default useNowPlayingMovies;
