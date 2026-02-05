@@ -16,7 +16,14 @@
 - update profile
 - fetch moives from TMDB movies
 - bug fix: sign up user like unauthourized logins 
-- unsubscribe to the onauthstatechanged callback
+- unsubscribe to the onauthstatechanged 
+- regiter TMDB api and create an app & get access token
+- get data from TMDB now playing movies list api
+- added custom hooks
+- created new slices for movies data
+- updated store
+- fetch data for trailer video
+- embedded the youtube video and make it autoplay
 
 # Features
 
