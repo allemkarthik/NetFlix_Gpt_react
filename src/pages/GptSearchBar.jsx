@@ -1,4 +1,5 @@
 import React from "react";
+import lang from "../utils/languageConstants";
 
 const GptSearchBar = () => {
   return (
@@ -7,10 +8,10 @@ const GptSearchBar = () => {
         <input
           type="text"
           className="p-4 m-4 bg-white col-span-9"
-          placeholder="What Would You Like to Watch Today?"
+          placeholder={lang.hindi.gptSearchPlaceHolder}
         />
         <button className="py-2 px-4 m-4 bg-red-700 text-white rounded-lg col-span-3">
-          Search
+          {lang.hindi.search}
         </button>
       </form>
     </div>
