@@ -19,8 +19,9 @@ const GptSearchBar = () => {
     const json = await data.json();
     return json.results;
   };
- const handleGptSearchClick = async () => {
+const handleGptSearchClick = async () => {
   const input = searchText.current.value;
+  if (!input) return;
 
   const response = await fetch("http://localhost:5000/api/gpt", {
     method: "POST",
@@ -32,16 +33,22 @@ const GptSearchBar = () => {
 
   const data = await response.json();
 
-  const gptMovieList = data.result.split(",");
+  if (!data.reply) {
+    console.error("GPT response error:", data);
+    return;
+  }
 
-  const tmdbPromises = gptMovieList.map((movie) =>
-    searchMovieTMDB(movie.trim())
+  const gptMovieList = data.reply.split(",").map(movie => movie.trim());
+
+  const tmdbPromises = gptMovieList.map(movie =>
+    searchMovieTMDB(movie)
   );
 
   const tmdbResults = await Promise.all(tmdbPromises);
 
   dispatch(addGptMovieResult(tmdbResults));
 };
+
 
   return (
     <div className="pt-[10%] flex justify-center">
