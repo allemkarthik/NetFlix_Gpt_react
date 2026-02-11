@@ -11,7 +11,7 @@ import { auth } from "../utils/firebase.jsx";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/store/userDataSlice.jsx";
-import { photoURL } from "../utils/constants.jsx";
+import { photoURL } from "../utils/constants.js";
 
 const Login = () => {
   const [isSignInForm, setSignInForm] = useState(true);
