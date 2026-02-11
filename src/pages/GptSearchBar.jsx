@@ -1,54 +1,56 @@
 import React, { useRef } from "react";
-import lang from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
-
-import { API_OPTIONS } from "../utils/constants";
 import { addGptMovieResult } from "../utils/store/gptSlice";
+import lang from "../utils/languageConstants";
+import { API_OPTIONS } from "../utils/constants";
 
 const GptSearchBar = () => {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
+
+  // Fetch TMDB for each movie
   const searchMovieTMDB = async (movie) => {
-    const data = await fetch(
-      "https://api.themoviedb.org/3/search/movie?query=" +
-        movie +
-        "&include_adult=false&language=en-US&page=1",
+    const response = await fetch(
+      `https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1`,
       API_OPTIONS,
     );
-    const json = await data.json();
+    const json = await response.json();
     return json.results;
   };
-const handleGptSearchClick = async () => {
-  const input = searchText.current.value;
-  if (!input) return;
 
-  const response = await fetch("http://localhost:5000/api/gpt", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ query: input }),
-  });
+  // GPT search click handler
+  const handleGptSearchClick = async () => {
+    const input = searchText.current.value.trim();
+    if (!input) return;
 
-  const data = await response.json();
+    try {
+      const response = await fetch("http://localhost:5000/api/gpt", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query: input }),
+      });
 
-  if (!data.reply) {
-    console.error("GPT response error:", data);
-    return;
-  }
+      const data = await response.json();
 
-  const gptMovieList = data.reply.split(",").map(movie => movie.trim());
+      if (!data.result) {
+        console.error("GPT returned empty response:", data);
+        return;
+      }
 
-  const tmdbPromises = gptMovieList.map(movie =>
-    searchMovieTMDB(movie)
-  );
+      // Split, trim and fetch TMDB results
+      const gptMovieList = data.result.split(",").map((m) => m.trim());
+      const tmdbPromises = gptMovieList.map((movie) => searchMovieTMDB(movie));
+      const tmdbResults = await Promise.all(tmdbPromises);
 
-  const tmdbResults = await Promise.all(tmdbPromises);
-
-  dispatch(addGptMovieResult(tmdbResults));
-};
-
+      // Save to redux
+      dispatch(addGptMovieResult({movieNames:gptMovieList, movieResults:tmdbResults}));
+    } catch (error) {
+      console.error("GPT search error:", error);
+    }
+  };
 
   return (
     <div className="pt-[10%] flex justify-center">
