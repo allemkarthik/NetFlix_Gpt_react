@@ -10,12 +10,14 @@ const app = express();
 // Middleware
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "https://allemkarthik.github.io/NetFlix_Gpt_react/#/",
-    ],
-  }),
-); // Allow frontend requests
+    origin: "https://allemkarthik.github.io",
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
+
+// Handle preflight requests explicitly
+app.options("*", cors());
 app.use(express.json()); // Parse JSON bodies
 
 // Initialize Groq client
