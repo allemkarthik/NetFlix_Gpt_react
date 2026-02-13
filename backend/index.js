@@ -7,17 +7,35 @@ dotenv.config();
 
 const app = express();
 
-// Middleware
-app.use(
-  cors({
-    origin: "https://allemkarthik.github.io",
-    methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
+const allowedOrigins = [
+  "https://allemkarthik.github.io",
+];
 
-// Handle preflight requests explicitly
-app.options("*", cors());
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,POST,PUT,DELETE,OPTIONS"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+
+  // 🔥 IMPORTANT: end preflight here
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(204);
+  }
+
+  next();
+});
+
 app.use(express.json()); // Parse JSON bodies
 
 // Initialize Groq client
