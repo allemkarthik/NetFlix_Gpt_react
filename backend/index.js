@@ -8,7 +8,14 @@ dotenv.config();
 const app = express();
 
 // Middleware
-app.use(cors()); // Allow frontend requests
+app.use(
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://allemkarthik.github.io/NetFlix_Gpt_react/#/",
+    ],
+  }),
+); // Allow frontend requests
 app.use(express.json()); // Parse JSON bodies
 
 // Initialize Groq client
@@ -43,12 +50,13 @@ app.post("/api/gpt", async (req, res) => {
     });
 
     // Clean reply
-    const reply =
-      (completion?.choices?.[0]?.message?.content || "No movies found")
-        .split(",")
-        .map((m) => m.trim())
-        .slice(0, 10) // Optional: limit to first 10 movies
-        .join(",");
+    const reply = (
+      completion?.choices?.[0]?.message?.content || "No movies found"
+    )
+      .split(",")
+      .map((m) => m.trim())
+      .slice(0, 10) // Optional: limit to first 10 movies
+      .join(",");
 
     res.json({ result: reply });
   } catch (error) {

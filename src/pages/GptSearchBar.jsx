@@ -25,7 +25,7 @@ const GptSearchBar = () => {
     if (!input) return;
 
     try {
-      const response = await fetch("http://localhost:5000/api/gpt", {
+      const response = await fetch("https://netflix-gpt-react.onrender.com/api/gpt", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
