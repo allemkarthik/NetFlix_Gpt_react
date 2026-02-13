@@ -99,13 +99,13 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img src={bgimage} alt="bgimage"></img>
+        <img className="h-screen object-cover md:h-auto" src={bgimage} alt="bgimage"></img>
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-3/12 absolute p-12 bg-black/80 my-36 mx-auto right-0 left-0 text-white rounded-lg"
+        className="w-[85%] mx-auto p-6  md:w-3/12 absolute md:p-12 bg-black/80 my-36  md:mx-auto right-0 left-0 text-white rounded-lg"
       >
-        <h1 className="font-bold text-2xl py-4">
+        <h1 className="text-lg py-2 font-bold md:font-bold md:text-2xl md:py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
@@ -120,7 +120,7 @@ const Login = () => {
           ref={email}
           type="text"
           placeholder="Email Address"
-          className="p-4 my-4 bg-gray-700 w-full"
+          className="p-4 md:my-4 bg-gray-700 w-full"
         />
         <input
           ref={password}
