@@ -1,44 +1,105 @@
-# NetFlix_gpt 
+Netflix-GPT 🎬🤖
 
-- create react vite
-- configured tailwind app
-- header
-- routing
-- login form 
-- sign up form
-- form validation
-- useRef hook
-- firebase setup
-- deploying app to production
-- authentication setup
-- created redux store
-- implemented signout 
-- update profile
-- fetch moives from TMDB movies
-- bug fix: sign up user like unauthourized logins 
-- unsubscribe to the onauthstatechanged 
-- regiter TMDB api and create an app & get access token
-- get data from TMDB now playing movies list api
-- added custom hooks
-- created new slices for movies data
-- updated store
-- fetch data for trailer video
-- embedded the youtube video and make it autoplay
+AI-Powered Movie Recommendation Web App
+A responsive web app that suggests movies using AI and fetches detailed info from TMDB API. Supports multi-language interface and user authentication via Firebase.
 
-# Features
+🚀 Features
 
-- login/ sign up
-     - sign in / sign up form
-     - redirect to browse page
+Generate personalized movie recommendations using AI prompts.
 
-- Browse page(after auth)
-   - Header
-   - main moive
-     - tailer in background
-     - title & description
-     - movie suggestion
-       -moivelist
+Fetch movie details dynamically from The Movie Database (TMDB) API.
 
-- netflixGpt
-   - search Bar
-   - movie suggestions
+Fully responsive UI with Tailwind CSS and smooth UX.
+
+Redux Toolkit for global state management.
+
+Firebase Authentication for secure user login/sign-up.
+
+Multi-language support with dynamic content based on user preference.
+
+Secure Node.js backend to handle AI requests without exposing API keys.
+
+Instant search and curated recommendations for users.
+
+🛠 Tech Stack
+
+Frontend:
+
+
+Backend:
+
+
+APIs:
+
+
+Others:
+
+
+📸 Screenshots
+
+Login / Firebase Auth:
+
+
+Home / Multi-Language Interface:
+
+
+Movie Recommendations:
+
+
+Movie Details:
+
+
+(Replace ./screenshots/ paths with your actual images)
+
+🔧 Installation & Setup
+
+Clone the repository:
+
+git clone https://github.com/allemkarthik/NetFlix_Gpt_react.git
+
+Frontend setup:
+
+cd NetFlix_Gpt_react
+npm install
+npm run build
+
+Backend setup:
+
+cd backend
+npm install
+cp .env.example .env
+# Add your GROQ_API_KEY and Firebase keys in .env
+npm start
+
+Update GptSearchBar.jsx API URL to your deployed backend URL.
+
+Configure Firebase .env keys if not already set.
+
+🌐 Live Demo
+
+Netflix-GPT on GitHub Pages
+
+✨ Future Enhancements
+
+User watchlist and saved preferences.
+
+Multi-language support for AI-generated recommendations.
+
+Ratings, reviews, and trailer previews integration.
+
+Pagination and infinite scroll for movie results.
+
+
+💡 Learning Outcomes
+
+Integrating AI-based prompts with a frontend application.
+
+Using Firebase Authentication for secure user login/signup.
+
+Implementing multi-language support with dynamic content rendering.
+
+Building a secure Node.js backend for sensitive API requests.
+
+Using Redux Toolkit for global state management in React.
+
+Deploying a frontend-backend split app with GitHub Pages and Render.
