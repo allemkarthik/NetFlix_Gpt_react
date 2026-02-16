@@ -23,30 +23,35 @@ Instant search and curated recommendations for users.
 
 🛠 Tech Stack
 
-Frontend:
+Frontend: React, Redux, Js(ES6), Tailwind CSS
 
 
-Backend:
+Backend: Node Js, Express, Firebase
 
 
-APIs:
+APIs: Groq API, TMDB API
 
 
-Others:
-
-
-📸 Screenshots
+📸 Screenshots:
 
 Login / Firebase Auth:
+![alt text](image-1.png)
 
+Browse/ Home page:
+![alt text](<src/assets/Screenshot 2026-02-15 230818.png>)
+
+Movie Details:
+![alt text](<src/assets/Screenshot 2026-02-15 230910.png>)
+
+Movie Recommendations using Groq API:
+![alt text](<src/assets/Screenshot 2026-02-15 231119.png>)
 
 Home / Multi-Language Interface:
 
+![alt text](<src/assets/Screenshot 2026-02-15 231135.png>)
 
-Movie Recommendations:
 
 
-Movie Details:
 
 
 (Replace ./screenshots/ paths with your actual images)
