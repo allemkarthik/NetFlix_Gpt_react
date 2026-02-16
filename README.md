@@ -54,7 +54,7 @@ Home / Multi-Language Interface:
 
 
 
-(Replace ./screenshots/ paths with your actual images)
+
 
 🔧 Installation & Setup
 
@@ -64,15 +64,15 @@ git clone https://github.com/allemkarthik/NetFlix_Gpt_react.git
 
 Frontend setup:
 
-cd NetFlix_Gpt_react
-npm install
-npm run build
+cd NetFlix_Gpt_react:
+npm install:
+npm run build:
 
 Backend setup:
 
-cd backend
-npm install
-cp .env.example .env
+cd backend:
+npm install:
+cp .env.example .env:
 # Add your GROQ_API_KEY and Firebase keys in .env
 npm start
 
@@ -80,7 +80,7 @@ Update GptSearchBar.jsx API URL to your deployed backend URL.
 
 Configure Firebase .env keys if not already set.
 
-🌐 Live Demo
+🌐 Live Demo: https://allemkarthik.github.io/NetFlix_Gpt_react/#/ 
 
 Netflix-GPT on GitHub Pages
 
